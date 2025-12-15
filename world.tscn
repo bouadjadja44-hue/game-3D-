@@ -1,0 +1,84 @@
+[gd_scene load_steps=18 format=3 uid="uid://bdlbwwjsiol7i"]
+
+[ext_resource type="Script" uid="uid://bpoxgxf7nh5ga" path="res://scripts/hint_debug.gd" id="1_ikiii"]
+[ext_resource type="PackedScene" uid="uid://c4lccs8l5darl" path="res://addons/godot4.3_fps_character_controller/Player/player.tscn" id="2_cbp6q"]
+[ext_resource type="PackedScene" uid="uid://carscene123" path="res://scenes/car.tscn" id="3_26xuy"]
+[ext_resource type="Script" uid="uid://ctpf2fovxdudw" path="res://scripts/trash_spawner.gd" id="4_bc84e"]
+[ext_resource type="PackedScene" uid="uid://trashitem123" path="res://scenes/trash_item.tscn" id="5_wukud"]
+[ext_resource type="PackedScene" uid="uid://cknmea33j50en" path="res://scenes/effects/toon_effect.tscn" id="7_wjb0r"]
+[ext_resource type="PackedScene" uid="uid://uihud123" path="res://scenes/ui_hud.tscn" id="8_mc2jv"]
+[ext_resource type="PackedScene" uid="uid://dygaksgk4xvaf" path="res://scenes/ui/pause_menu.tscn" id="9_bo7i5"]
+[ext_resource type="PackedScene" uid="uid://dtv4awg1mejfl" path="res://scenes/ui/upgrade_shop.tscn" id="10_4h6ng"]
+[ext_resource type="PackedScene" uid="uid://whloowwa05yh" path="res://scenes/ui/hint_display.tscn" id="11_o3ebs"]
+[ext_resource type="PackedScene" uid="uid://do20hdxnokvfl" path="res://scenes/smallgarage.tscn" id="12_k83mh"]
+[ext_resource type="PackedScene" uid="uid://dhxl5gvgppqe2" path="res://scenes/node_3d.tscn" id="14_70uel"]
+[ext_resource type="PackedScene" uid="uid://ciiqbwc0u8egg" path="res://scenes/interactables/computer_terminal.tscn" id="14_bh8nc"]
+[ext_resource type="PackedScene" uid="uid://computerui123" path="res://scenes/ui/computer_ui.tscn" id="15_jjr1n"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g1i3r"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+energy_multiplier = 0.55
+
+[sub_resource type="Sky" id="Sky_getpj"]
+sky_material = SubResource("ProceduralSkyMaterial_g1i3r")
+
+[sub_resource type="Environment" id="Environment_my276"]
+background_mode = 2
+sky = SubResource("Sky_getpj")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="ؤهفغ" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_my276")
+
+[node name="HintDebug" type="Node" parent="."]
+script = ExtResource("1_ikiii")
+
+[node name="Player" parent="." instance=ExtResource("2_cbp6q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.55065, 10.8469)
+Move_Speed = null
+Sprint_Speed = null
+PlayerInventory = null
+InputDictionary = null
+Mouse_Sens = null
+grab_distance = null
+throw_force = null
+hold_distance = null
+grab_speed = null
+
+[node name="Car" parent="." instance=ExtResource("3_26xuy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 6.30261, 18.6431)
+
+[node name="TrashSpawner" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.82497, 5.85405)
+script = ExtResource("4_bc84e")
+trash_scene = ExtResource("5_wukud")
+spawn_count = 50
+spawn_area_size = Vector3(100, 20, 100)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ToonEffect" parent="CanvasLayer" instance=ExtResource("7_wjb0r")]
+
+[node name="UI_HUD" parent="CanvasLayer" instance=ExtResource("8_mc2jv")]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("9_bo7i5")]
+process_mode = 3
+
+[node name="UpgradeShop" parent="CanvasLayer" instance=ExtResource("10_4h6ng")]
+
+[node name="HintDisplay" parent="CanvasLayer" instance=ExtResource("11_o3ebs")]
+
+[node name="ComputerTerminal" parent="." instance=ExtResource("14_bh8nc")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.06954, 1.35682, 27.1077)
+
+[node name="ComputerUI" parent="." instance=ExtResource("15_jjr1n")]
+visible = false
+
+[node name="smallgarage" parent="." instance=ExtResource("12_k83mh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.8567, 0, 0.871027)
+
+[node name="Node3D" parent="." instance=ExtResource("14_70uel")]
